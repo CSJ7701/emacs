@@ -1,11 +1,13 @@
 # Ignore everything
-*
+/*
 
-# Except my init file
+# Specifically some file types
+*.elc
+.cask
+*~
+*.~undo-tree
+
+# Except my config
 !init.el
-
-# Gitignore itself
 !.gitignore
-
-# And my modules
 !modules/
