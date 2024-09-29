@@ -5,4 +5,4 @@
 !init.el
 
 # And my modules
-!./modules/*
+!modules/*
