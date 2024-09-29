@@ -1,11 +1,8 @@
-# Compiled
-*.elc
+# Ignore everything
+*
 
-# Packaging
-.cask
+# Except my init file
+!init.el
 
-# Backup files
-*~
-
-# Undo-tree save-files
-*.~undo-tree
+# And my modules
+!modules/*
