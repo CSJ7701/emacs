@@ -4,5 +4,8 @@
 # Except my init file
 !init.el
 
+# Gitignore itself
+!.gitignore
+
 # And my modules
 !modules/
