@@ -2,7 +2,7 @@
 *
 
 # Except my init file
-!init.el
+!./init.el
 
 # And my modules
-!modules/*
+!./modules/*
