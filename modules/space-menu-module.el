@@ -60,13 +60,14 @@
 
 (pretty-hydra-define space-menu-git (:foreign-keys warn :title "󰘧 Git" :quit-key ("<escape>" "C-g"))
   ("Frequent"
-    (("s" magit-status "Status" :exit t)
-     ("c" magit-commit "Commit" :exit t)
-     ("p" magit-push "Push" :exit t)
-     ("f" magit-pull-from-pushremote "Pull" :exit t))
-    "Utilities"
-    (("R" magit-remote-add "Add Remote" :exit t))
-    ))
+   (("s" magit-status "Status" :exit t)
+    ("S" magit-list-repositories "Status All" :exit t)
+    ("c" magit-commit "Commit" :exit t)
+    ("p" magit-push "Push" :exit t)
+    ("f" magit-pull-from-pushremote "Pull" :exit t))
+   "Utilities"
+   (("R" magit-remote-add "Add Remote" :exit t))
+   ))
 
 (pretty-hydra-define space-menu-config (:foreign-keys warn :title "󰘧 Config" :quit-key ("<escape>" "C-g"))
   ("Frequent"
