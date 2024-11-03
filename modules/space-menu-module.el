@@ -87,7 +87,8 @@
     ("p" (dired "~/Projects") "Projects" :exit t))
    "Personal"
    (("l" (find-file *cj/ledger-file*) "Ledger" :exit t)
-    ("j" (find-file cj/journal-file) "Journal" :exit t))
+    ("j" (find-file *cj/journal-file*) "Journal" :exit t)
+    ("f" (find-file *cj/fitness-file*) "Fitness" :exit t))
    ))
 
 (defun cj/elfeed-filter-helper (filter)

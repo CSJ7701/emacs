@@ -15,6 +15,7 @@
 	("~/class" . 1)
 	("~/Projects" . 1)
 	("~/Server" . 1)
+	("~/School" . 1)
 	("~/Personal" . 1)))
 
 ;; Update magit flag icons.

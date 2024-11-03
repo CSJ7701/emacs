@@ -238,7 +238,8 @@
 
 
 ;; Capture Template Helper
-(defconst *cj/ledger-file* (format-time-string "~/Personal/Ledger/Year/%y.ledger"))
+;;; Now defined in variable module
+;; (defconst *cj/ledger-file* (format-time-string "~/Personal/Ledger/Year/%y.ledger"))
 (defun cj/capture-project-file ()
   "Return a filename for a roam project file"
   (let* (
@@ -251,7 +252,7 @@
       (goto-char (point-max)))))
     
 
-(defvar cj/journal-file "~/org/Journal.org")
+;; (defvar cj/journal-file "~/org/Journal.org")
 (setq org-capture-templates
       `(
     	("p" "Personal")
