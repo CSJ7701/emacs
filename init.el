@@ -136,6 +136,12 @@
   "C-y" 'yank
   "M-y" 'counsel-yank-pop)
 
+;; Mode Specific Keybindings
+(general-define-key
+ :keymaps 'org-capture-mode-map
+ "C-c C-t" 'counsel-org-tag)
+		    
+
 ;; Customizing the UI
 (load-module "themes") 
 (load-theme 'Pywal t)
