@@ -244,3 +244,4 @@
  '(org-column ((t (:background "gray0" :strike-through nil :underline nil :slant normal :weight normal))))
  '(org-imminent-deadline ((t (:foreground "MediumPurple3" :weight bold :slant italic))))
  '(org-upcoming-deadline ((t (:foreground "LightPink" :slant oblique)))))
+(put 'narrow-to-region 'disabled nil)
