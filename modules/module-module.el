@@ -3,7 +3,7 @@
 (defvar cj/all-modules '())
 (defvar cj/loaded-modules '())
 (defvar cj/unloaded-modules '())
-(defvar cj/init-file "~/.dotfiles/.emacs.d/init.el")
+(defvar cj/init-file "~/.emacs.d/init.el")
 
 (defun load-module (&optional module-name)
   "Load the specified module or prompt for a module to load."
