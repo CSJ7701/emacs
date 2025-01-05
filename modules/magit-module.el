@@ -3,6 +3,8 @@
   ;; :custom
   ;; (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :straight t)
+(use-package forge
+  :after magit)
 
 (setq magit-section-inhibit-markers nil)
 (setq magit-section-preserve-visibility nil)
