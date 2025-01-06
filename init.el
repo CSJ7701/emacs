@@ -156,7 +156,7 @@
 ;;; org, org-roam
 (load-module "org")
 (load-module "roam")
-
+(load-module "org-ranker")
 
 ;; Development
 (load-module "undo-tree")
@@ -164,6 +164,7 @@
 (load-module "yuck")
 (load-module "python")
 (load-module "web")
+(load-module "lua")
 (load-module "java")
 (load-module "matlab")
 (load-module "yuck")

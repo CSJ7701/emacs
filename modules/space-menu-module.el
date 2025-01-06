@@ -160,6 +160,7 @@
     )
     "Utilities"
     (("z" org-mode-restart "Restart" :exit t)
+     ("R" org-ranker-hydra/body "Org Ranker" :exit t) 
      ("L" org-lint "Check file for errors" :exit t)
      )))
 
