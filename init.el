@@ -144,7 +144,8 @@
 
 ;; Customizing the UI
 (load-module "themes") 
-(load-theme 'Pywal t)
+(load-theme 'doom-nord-aurora t)
+;(load-theme 'Pywal t)
 
 ;; Modeline and Minibuffer Improvements
 (load-module "modeline")
@@ -178,6 +179,9 @@
 (load-module "eshell")
 (load-module "compile")
 ;; (load-module "github-copilot")
+(load-module "ellama")
+(load-module "csv")
+
 
 ;; Peripherals
 ;;; scratch, treemacs, dashboard, etc
@@ -206,11 +210,16 @@
 (load-file "/home/csj7701/.emacs.d/modules/emacs-functions.el")
 
 (cj/calc-unused-modules)
+
+(load-module "org-ranker")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("571661a9d205cb32dfed5566019ad54f5bb3415d2d88f7ea1d00c7c794e70a36" default))
  '(safe-local-variable-values
    '((python-shell-interpreter . "/home/csj7701/.virtualenvs/ServerHub/bin/")
      (eval progn

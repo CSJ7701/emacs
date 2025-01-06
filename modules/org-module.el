@@ -38,7 +38,7 @@
 (setq org-image-actual-width nil)
 
 ;; Save Org buffers after refiling and archiving!
-(advice-add 'org-refile :after 'org-save-all-org-buffers)
+(advice-add 'org-refile :after (lambda (&rest _) (org-save-all-org-buffers)))
 (advice-add 'org-archive-subtree :after 'org-save-all-org-buffers)
 ;; Automatically archive done todos
 (add-hook 'org-after-todo-state-change-hook 'cj/auto-archive-todos-ql)

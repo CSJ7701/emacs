@@ -15,6 +15,7 @@
     ("SPC" major-mode-hydra "  Major Mode" :exit t)
     ("C" space-menu-config/body "    Config" :exit t)
     ("G" space-menu-goto/body "    Goto" :exit t)
+    ("A" space-menu-ellama/body "     Ellama" :exit t)
     )))
 
 
@@ -117,6 +118,50 @@
     ("u" mu4e-update-mail-and-index "Update" :exit t)
     )
    ))
+
+(pretty-hydra-define space-menu-ellama (:foreign-keys warn :title "󰘧 Ellama" :quit-key ("<escape>" "C-g"))
+  ("Code"
+   (("cc" ellama-code-complete "Complete" :exit t)
+    ("ca" ellama-code-add "Add" :exit t)
+    ("ce" ellama-code-edit "Edit" :exit t)
+    ("ci" ellama-code-improve "Improve" :exit t)
+    ("cr" ellama-code-review "Review" :exit t)
+    ("cm" ellama-generate-commit-message "Commit Message" :exit t))
+   "Chat"
+   (("a" ellama-ask-about "About" :exit t)
+    ("i" ellama-chat "Chat" :exit t)
+    ("l" ellama-ask-line "Line" :exit t)
+    ("s" ellama-ask-selection "Selection" :exit t))
+   "Text"
+   (("tc" ellama-complete-text "Complete" :exit t)    
+    ("ts" ellama-summarize "Summarize" :exit t)
+    ("ti" ellama-improve-wording "Improve Wording" :exit t)
+    ("tg" ellama-improve-grammar "Improve Grammar" :exit t)
+    ("tC" ellama-improve-conciseness "Improve Conciseness" :exit t)
+    ("tw" ellama-summarize-webpage "Summarize Webpage" :exit t)
+    ("tk" ellama-summarize-killring "Summarize Killring" :exit t))
+   "Session"
+   (("Sl" ellama-load-session "Load" :exit t)
+    ("Sr" ellama-session-rename "Rename" :exit t)
+    ("Sd" ellama-session-remove "Delete" :exit t)
+    ("Sa" ellama-session-switch "Switch" :exit t))
+   "Context"
+   (("xb" ellama-context-add-buffer "Add Buffer" :exit t)
+    ("xf" ellama-context-add-file "Add File" :exit t)
+    ("xs" ellama-context-add-selection "Add Selection" :exit t)
+    ("xi" ellama-context-add-info-node "Add Info Node" :exit t))
+   "Utility"
+   (("up" ellama-provider-select "Select Provider" :exit t)
+    ("uw" ellama-define-word "Define Word" :exit t)
+    ("ut" ellama-translate-text "Translate Selection" :exit t)
+    ("ub" ellama-translate-buffer "Translate Buffer" :exit t)
+    ("uc" ellama-chat-translation-enable "Translate Chat" :exit t)
+    ("uC" ellama-char-translation-disable "Stop Translating Chat" :exit t)
+    ("ul" ellama-make-list "Make List" :exit t)
+    ("uT" ellama-make-table "Make Table" :exit t)
+    ("uf" ellama-make-format "Make Format" :exit t))
+   ))
+     
 
 
 ;;; Major Mode Hydras

@@ -1,12 +1,16 @@
 (use-package org-fragtog)
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 (require 'ox-latex)
+(require 'ox-extra)
+(use-package engrave-faces) ; for (org-latex-src-block-backend 'engraved)
 
-
+(ox-extras-activate '(ignore-headlines))
 
 (setq org-startup-with-latex-preview t
       org-latex-packages-alist '())
+
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
+
 (add-to-list 'org-latex-packages-alist '("" "gensymb" t))
 (add-to-list 'org-latex-packages-alist '("" "placeins" t))
 ;; (add-to-list 'org-latex-packages-alist '("" "minted" t))
@@ -14,10 +18,21 @@
 ;; (setq org-latex-src-block-backend 'minted)
 (setq org-latex-src-block-backend 'verbatim)
 
-(setq org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+;; (setq org-latex-pdf-process
+;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+
+(add-to-list 'org-latex-classes
+             '("IEEEtran"
+               "\\documentclass{IEEEtran}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 
 

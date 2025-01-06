@@ -31,3 +31,14 @@
       bibtex-autokey-titleword-length 5)
 
 (org-roam-bibtex-mode 1)
+
+(defun org-ref-insert-cite-type-link ()
+  "Call 'org-ref-insert-cite-link' with the universal argument."
+  (interactive)
+  (let ((current-prefix-arg '(4)))
+    (call-interactively 'org-ref-insert-cite-link)))
+(defvar org-ref-insert-cite-type-function 'org-ref-insert-cite-type-link)
+
+(defhydra+ org-ref-insert-link-hydra () ("{" (funcall org-ref-insert-cite-type-function) "Citation /w type" :column "org-ref"))
+
+				       
