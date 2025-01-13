@@ -267,7 +267,7 @@
 	 "** TODO %?")
 
 	("j" "Journal")
-	("jt" "Today" plain (file+olp+datetree "~/org/Journal.org") "- %<%H:%M>     %?" :tree-type day)
+	("jt" "Today" plain (file+olp+datetree "~/org/Journal.org") "- %?" :tree-type day)
 	("jd" "Select Date" plain (file+olp+datetree "~/org/Journal.org") "- %i %?" :time-prompt t)
 	("jf" "Today's Rating" plain (function cj/daily-capture-properties) ":Rating: %^{How was Today? (-3 to +3)}" :immediate-finish t)
 
@@ -315,7 +315,7 @@
 
       %:initial" :empty-lines 1)
     	("ib" "Bookmark" entry (file+headline "~/org/org-linkz/index.org" "INBOX")
-p    	 "* %a %U"
+    	 "* %a %U"
     	 :immediate-finish t)
 	("c" "Cookbook")
 	("ci" "Internet Recipe" entry (file "~/org/cookbook.org")
