@@ -169,6 +169,7 @@
 (load-module "java")
 (load-module "matlab")
 (load-module "yuck")
+(load-module "tridactyl")
 (load-module "company")
 (load-module "projectile")
 (load-module "prescient")
@@ -210,8 +211,6 @@
 (load-file "/home/csj7701/.emacs.d/modules/emacs-functions.el")
 
 (cj/calc-unused-modules)
-
-(load-module "org-ranker")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
