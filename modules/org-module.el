@@ -48,15 +48,18 @@
 
 (setq org-tag-alist
       '((:startgrouptag)
-	("F24")
+	("S24")
 	(:grouptags)
-	("DataStructures" . ?D)
-	("Comms" . ?C)
+	("EngineeringEthics" . ?E)
+	("Professional Maritime Officer" . ?M)
+	("IndustrialControls" . ?I)
+	("GlobalChallenges" . ?G)
+	("Capstone" . ?C)
         (:endgroup)
 	
-        ("@errand" . ?E)
-        ("@home" . ?H)
-        ("@work" . ?W)
+        ("@errand" . ?e)
+        ("@home" . ?h)
+        ("@work" . ?w)
         ("agenda" . ?a)
         ("planning" . ?p)
         ("publish" . ?P)
@@ -288,7 +291,7 @@
     	 "* TEST %?\n DEADLINE: %^t")
     	("sq" "Quiz" entry (file+olp "~/org/Tasks-School.org" "Study")
     	 "* QUIZ %?\n DEADLINE: %^t")
-    	("sa" "Appointment" entry (file+olp "~/org/Tasks-school" "Appointents")
+    	("sa" "Appointment" entry (file+olp "~/org/Tasks-School.org" "Appointments")
     	 "* %? \n SCHEDULED: %^t")
 	
         ("m" "Email Workflow")
