@@ -183,6 +183,7 @@
 ;; (load-module "github-copilot")
 (load-module "ellama")
 (load-module "csv")
+(load-module "eat")
 
 
 ;; Peripherals
