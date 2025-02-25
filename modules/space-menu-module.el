@@ -3,8 +3,7 @@
   ("Frequent"
    (("o" space-menu-org/body "  Org" :exit t)
     ("r" space-menu-roam/body "  Roam" :exit t)
-					; ("g" space-menu-git/body " 󰊢 Git" :exit t)
-    ("g" magit-dispatch " 󰊢 Git" :exit t)
+    ("g" space-menu-git/body " 󰊢 Git" :exit t)
     )
    "Utilities"
    (("m" space-menu-mu4e/body " 󰊫 Mu4E" :exit t)
