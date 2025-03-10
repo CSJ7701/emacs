@@ -177,6 +177,7 @@
 (load-module "json")
 (load-module "lisp")
 (load-module "eshell")
+(load-module "eat")
 (load-module "compile")
 ;; (load-module "github-copilot")
 (load-module "ellama")
