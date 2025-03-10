@@ -48,15 +48,18 @@
 
 (setq org-tag-alist
       '((:startgrouptag)
-	("F24")
+	("S24")
 	(:grouptags)
-	("DataStructures" . ?D)
-	("Comms" . ?C)
+	("EngineeringEthics" . ?E)
+	("Professional Maritime Officer" . ?M)
+	("IndustrialControls" . ?I)
+	("GlobalChallenges" . ?G)
+	("Capstone" . ?C)
         (:endgroup)
 	
-        ("@errand" . ?E)
-        ("@home" . ?H)
-        ("@work" . ?W)
+        ("@errand" . ?e)
+        ("@home" . ?h)
+        ("@work" . ?w)
         ("agenda" . ?a)
         ("planning" . ?p)
         ("publish" . ?P)
@@ -267,7 +270,7 @@
 	 "** TODO %?")
 
 	("j" "Journal")
-	("jt" "Today" plain (file+olp+datetree "~/org/Journal.org") "- %<%H:%M>     %?" :tree-type day)
+	("jt" "Today" plain (file+olp+datetree "~/org/Journal.org") "- %?" :tree-type day)
 	("jd" "Select Date" plain (file+olp+datetree "~/org/Journal.org") "- %i %?" :time-prompt t)
 	("jf" "Today's Rating" plain (function cj/daily-capture-properties) ":Rating: %^{How was Today? (-3 to +3)}" :immediate-finish t)
 
@@ -288,7 +291,7 @@
     	 "* TEST %?\n DEADLINE: %^t")
     	("sq" "Quiz" entry (file+olp "~/org/Tasks-School.org" "Study")
     	 "* QUIZ %?\n DEADLINE: %^t")
-    	("sa" "Appointment" entry (file+olp "~/org/Tasks-school" "Appointents")
+    	("sa" "Appointment" entry (file+olp "~/org/Tasks-School.org" "Appointments")
     	 "* %? \n SCHEDULED: %^t")
 	
         ("m" "Email Workflow")
@@ -315,7 +318,7 @@
 
       %:initial" :empty-lines 1)
     	("ib" "Bookmark" entry (file+headline "~/org/org-linkz/index.org" "INBOX")
-p    	 "* %a %U"
+    	 "* %a %U"
     	 :immediate-finish t)
 	("c" "Cookbook")
 	("ci" "Internet Recipe" entry (file "~/org/cookbook.org")

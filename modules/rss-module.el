@@ -2,7 +2,7 @@
 (use-package elfeed)
 ;; (use-package elfeed-webkit)
 (use-package elfeed-goodies)
-(use-package elfeed-web)
+;; (use-package elfeed-web)
 (use-package elfeed-protocol)
 (use-package elfeed-tube
   :config (elfeed-tube-setup)
