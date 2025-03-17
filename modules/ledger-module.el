@@ -6,7 +6,7 @@
 (setq ledger-reports
       '(("Balance" "%(binary) -f ~/Personal/Ledger/Main.ledger bal not \\(Budget or Equity\\)")
   	("Monthly Balance" "%(binary) -f ~/Personal/Ledger/Main.ledger bal -p %(month) -S amount")
-	("2 Month Expenses" "python ~/Personal/Ledger/Reports/Two_Month.py")
+	("2 Month Expenses" "python ~/Personal/Ledger/Commands/Two_Month.py")
 	("Net Worth" "%(binary) -f ~/Personal/Ledger/Main.ledger bal Assets Liabilities")))
 
 (defun cj/ledger-get-accounts ()
