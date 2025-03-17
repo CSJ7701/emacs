@@ -162,7 +162,7 @@
 
 ;; Development
 (load-module "undo-tree")
-;; (load-module "lsp")
+(load-module "lsp")
 (load-module "yuck")
 (load-module "python")
 (load-module "web")
