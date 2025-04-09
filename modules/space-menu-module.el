@@ -234,9 +234,11 @@
    (("a" cj/ledger-insert-account "Account" :exit t)
     ("t" cj/ledger-insert-tag "Tag" :exit t)
     ("r" cj/ledger-rename-account "Rename Account" :exit t)
+    ("b" cj/ledger-insert-budget "Budget" :exit t)
     )
    "Reports"
-   ()
+   (("R" cj/ledger-report "Ledger Reports" :exit t)
+    )
    ))
 
 (major-mode-hydra-define compilation-mode (:quit-key ("<escape>" "C-g"))

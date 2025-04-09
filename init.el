@@ -144,7 +144,7 @@
 
 ;; Customizing the UI
 (load-module "themes") 
-(load-theme 'doom-nord-aurora t)
+(load-theme 'kaolin-valley-dark t)
 					;(load-theme 'Pywal t)
 (add-to-list 'default-frame-alist '(background-mode . dark))
 
@@ -162,7 +162,7 @@
 
 ;; Development
 (load-module "undo-tree")
-;; (load-module "lsp")
+(load-module "lsp")
 (load-module "yuck")
 (load-module "python")
 (load-module "web")
@@ -179,6 +179,7 @@
 (load-module "json")
 (load-module "lisp")
 (load-module "eshell")
+(load-module "eat")
 (load-module "compile")
 ;; (load-module "github-copilot")
 (load-module "ellama")

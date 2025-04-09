@@ -1,4 +1,8 @@
 
+; These 2 lines fix an issue with 'project' and 'eglot'.
+(straight-use-package '(project :type built-in))
+(straight-use-package '(xref :type built-in))
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred))
 (use-package eglot)

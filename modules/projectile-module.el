@@ -15,3 +15,7 @@
 (when (file-directory-p "~/projects/")
   (setq projectile-project-search-path '("~/projects/")))
 (setq projectile-switch-project-action #'projectile-dired)
+
+(setq projectile-indexing-method 'hybrid)
+(add-to-list 'projectile-globally-ignored-file-suffixes "~undo-tree~")
+(add-to-list 'projectile-globally-ignored-directories "*__pycache__")
