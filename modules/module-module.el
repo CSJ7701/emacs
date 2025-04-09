@@ -3,6 +3,8 @@
 (defvar cj/all-modules '())
 (defvar cj/loaded-modules '())
 (defvar cj/unloaded-modules '())
+(defvar cj/module-conflicts (make-hash-table :test 'equal)
+  "Hash table mapping modules to list of conflicting modules.")
 (defvar cj/init-file "~/.emacs.d/init.el")
 
 (defun load-module (&optional module-name)
@@ -14,6 +16,18 @@
     (when (file-exists-p module-file)
       (load module-file)
       (add-to-list 'cj/loaded-modules module-name))))
+
+(defun module-conflict (module conflict)
+  "Record a conflict between MODULE and CONFLICT symettrically.
+When a conflict with MODULE and CONFLICT is recorded, a conflict between CONFLICT and MODULE is also recorded."
+  (when (and (member module cj/all-modules)
+	     (member conflict cj/all-modules))
+    (let ((module-conflicts (gethash module cj/module-conflicts nil))
+	  (conflict-conflicts (gethash conflict cj/module-conflicts nil)))
+      (unless (member conflict module-conflicts)
+	(puthash module (cons conflict module-conflicts) cj/module-conflicts))
+      (unless (member module conflict-conflicts)
+	(puthash conflict (cons module conflict-conflicts) cj/module-conflicts)))))
 
 (defun cj/open-module (&optional module-name)
   "Open the specified module file or prompt for a module to open."
@@ -68,8 +82,110 @@
   (setq cj/unloaded-modules (-difference cj/all-modules cj/loaded-modules)))
 
 
-;; TODO
-;; Write a function that lets you visualize what modules are loaded vs unloaded
-;; You could do this with 2 alists, "cj/modules-loaded" and "cj/modules-unloaded"
-;; modules unloaded starts off as checking all properly named files in module directory and adding all of them, then you could add a line to the load function that adds each file/module to the "loaded" variable and checks the difference between the two variables (removing common elements from the unloaded var)
-;; You could then create a 3rd variable that just lists ALL modules, and see if you can write a function that creates a temp org buffer with a table displaying module name, file path, loaded or not, and selecting can expand into a list of packages in that module plus variable definitions and functions defined in the function file.
+
+;; === Visualization ===
+(require 'tabulated-list)
+
+(defvar cj/module-table-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "RET") #'cj/module-conflict-view)
+    (define-key map (kbd "q") #'cj/quit-module-table)
+    (define-key map (kbd "C-c C-c") #'cj/module-table-load-module)
+    map)
+  "Keymap for `cj/module-table-mode'.")
+
+(defvar cj/module-conflict-view-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "q") #'kill-buffer-and-window)
+    map)
+  "Keymap for `cj/module-conflict-view-mode'.")
+
+(define-derived-mode cj/module-table-mode tabulated-list-mode "Module Table"
+  "Major mode for viewing loaded modules and their conflicts."
+  (interactive)
+  (kill-all-local-variables)
+  (setq major-mode 'cj/module-table-mode)
+  (setq mode-name "Module Table")
+  ;; Define the format of the table: 3 columns
+  (setq tabulated-list-format
+        [("Module" 20 t)        ;; Module name column, width 20
+         ("Loaded" 10 t)        ;; Loaded status column, width 10
+         ("Conflicts" 20 nil)]) ;; Conflicts column, width 20
+  (setq tabulated-list-padding 2)
+  (read-only-mode 1)
+  (use-local-map cj/module-table-mode-map)
+  (tabulated-list-init-header))
+
+(define-derived-mode cj/module-conflict-view-mode special-mode "Conflict Sidebar" 
+  "Major mode for a module's conflict view."
+  (read-only-mode 1))
+  
+(defun cj/module-table-refresh ()
+  "Refresh the module table, updating its entries."
+  (setq-local tabulated-list-entries
+              (mapcar (lambda (module)
+                        (let* ((name module)
+                               (loaded (if (member name cj/loaded-modules) "Yes" "No"))
+                               (conflicts (gethash name cj/module-conflicts))
+                               (conflict-count (length (or conflicts '())))
+                               ;; Display plain text for the table, no properties
+			       (conflict-summary (if conflicts
+						     (if (get-text-property 0 'expanded (mapconcat #'identity conflicts ", "))
+							 (mapconcat #'identity conflicts ", ")
+						       (format "%d conflicts" conflict-count))
+						   "0")))
+			  (put-text-property 0 (length conflict-summary) 'expanded nil conflict-summary)
+			  (list name (vector name loaded conflict-summary))))
+		      cj/all-modules))
+  (tabulated-list-print t))
+
+(defun cj/module-conflict-view ()
+  "Show a side window with detailed conflict information for the selected module."
+  (interactive)
+  (if (get-buffer "*Conflict Details*")
+      (kill-buffer "*Conflict Details*"))
+  (let* ((entry (tabulated-list-get-entry))
+         (module-name (aref entry 0))
+         (conflicts (gethash module-name cj/module-conflicts)))
+    (if conflicts
+        (let ((buf (get-buffer-create (format "*Conflict Details*"))))
+          (with-current-buffer buf
+            (erase-buffer)
+            (insert (format "Module: %s\n\n" module-name))
+            (insert "Conflicts:\n")
+            (dolist (conflict conflicts)
+              (insert (format "- %s\n" conflict)))
+	    (goto-char (point-min))
+	    (cj/module-conflict-view-mode))
+          ;; Display the buffer in a side window.
+          (display-buffer-in-side-window buf '((side . right)
+                                                 (window-width . 40))))
+      (message "Module %s has no conflicts." module-name))))
+
+(defun cj/module-table ()
+  "Display the module table to visualized loaded and unloaded modules."
+  (interactive)
+  (let ((buf (get-buffer-create "*Modules*")))
+    (with-current-buffer buf
+      (cj/module-table-mode)
+      (cj/module-table-refresh)
+      (switch-to-buffer buf))))
+
+(defun cj/module-table-load-module ()
+  "Load the module selected in the table."
+  (interactive)
+  (let* ((module (tabulated-list-get-id)))
+    (if module
+        (load-module module)
+      (message "No module selected."))))
+
+(defun cj/quit-module-table ()
+  "Quit the module table buffer, and close the conflict sidebar if open."
+  (interactive)
+  (if (get-buffer "*Conflict Details*")
+      (kill-buffer "*Conflict Details*"))
+  (kill-buffer))
+
+;; TODO:
+;; Make this into a true package?
+;; Possible option to display follow up message instead of error on conflict - although error may just be better (makes the conflict seem more meaningful, harder to miss)

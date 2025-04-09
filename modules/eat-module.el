@@ -9,3 +9,5 @@
                (:exclude ".dir-locals.el" "*-tests.el"))))
 
 (add-hook 'eshell-load-hook #'eat-eshell-mode)
+(setq eat-default-cursor-type "visible")
+      
