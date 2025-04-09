@@ -144,7 +144,7 @@
 
 ;; Customizing the UI
 (load-module "themes") 
-(load-theme 'doom-nord-aurora t)
+(load-theme 'kaolin-valley-dark t)
 					;(load-theme 'Pywal t)
 (add-to-list 'default-frame-alist '(background-mode . dark))
 
