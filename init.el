@@ -199,7 +199,7 @@
 (load-module "evil-nerd-commenter")
 (load-module "rainbow-delimiters")
 (load-module "browsers")
-;; (load-module "mail")
+(load-module "mail")
 (load-module "chat")
 (load-module "dired")
 (load-module "rss")
