@@ -185,9 +185,6 @@ Uses a half second timer to introduce a delay."
   (newline)
   (insert (format "[[file:%s]]" img)))
 
-(defun org-insert-heading-link()
-  )
-
 (defun org-insert-heading-link ()
   "Insert a link to an org heading in the current file."
   (interactive)

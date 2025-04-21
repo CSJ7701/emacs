@@ -20,6 +20,7 @@
 (load-module "org-notifications")
 (load-module "org-ref")
 (load-module "org-caldav")
+(load-module "org-toc")
 
 (setq org-ellipsis " ▾")
 (setq org-startup-with-inline-images t)
