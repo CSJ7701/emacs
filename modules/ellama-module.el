@@ -5,9 +5,9 @@
 
 (setopt ellama-provider
 	(make-llm-ollama
-	 :chat-model "llama3.2"
-	 :embedding-model "nomic-embed-text"
-	 :default-chat-non-standard-params '(("num_ctx" . 8192))))
+	 :chat-model "llama2"
+	 :host "192.168.1.172"
+	 :embedding-model "nomic-embed-text"))
 
 
 	 
