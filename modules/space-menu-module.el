@@ -235,6 +235,7 @@
     ("t" cj/ledger-insert-tag "Tag" :exit t)
     ("r" cj/ledger-rename-account "Rename Account" :exit t)
     ("b" cj/ledger-insert-budget "Budget" :exit t)
+    ("B" (cj/ledger-insert-budget t) "Budget (Other month)" :exit t)
     )
    "Reports"
    (("R" cj/ledger-report "Ledger Reports" :exit t)

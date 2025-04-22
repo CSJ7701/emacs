@@ -12,10 +12,16 @@
   (interactive)
   (unless module-name
     (setq module-name (completing-read "Load module: " (mapcar (lambda (file) (replace-regexp-in-string "-module\\.el$" "" file)) (directory-files user-modules-dir nil "-module\\.el$")))))
+  (let ((conflicts (gethash module-name cj/module-conflicts)))
+    (when (seq-some (lambda (m) (member m cj/loaded-modules)) conflicts)
+      (error "Module '%s' conflicts with already loaded module(s): %s"
+	     module-name
+	     (string-join (seq-filter (lambda (m) (member m cj/loaded-modules)) conflicts) ", "))))
   (let ((module-file (expand-file-name (format "%s-module.el" module-name) user-modules-dir)))
     (when (file-exists-p module-file)
       (load module-file)
-      (add-to-list 'cj/loaded-modules module-name))))
+      (add-to-list 'cj/loaded-modules module-name)
+      (message module-file))))
 
 (defun module-conflict (module conflict)
   "Record a conflict between MODULE and CONFLICT symettrically.
