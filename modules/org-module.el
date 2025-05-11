@@ -12,7 +12,6 @@
 (use-package org-bullets)
 (require 'org-protocol)
 					;(use-package org-agenda-property)
-
 (load-module "org-contrib")
 (load-module "org-babel")
 (load-module "org-latex")
@@ -37,6 +36,9 @@
 (setq org-columns-default-format "%10TODO %50ITEM(Task) %20DEADLINE %20SCHEDULED %TAGS")
 ;(setq org-agenda-property-list '("DEADLINE" "SCHEDULED"))
 (setq org-image-actual-width nil)
+
+;; Fix org mode angle bracket issue
+(add-hook 'org-mode-hook #'cj/org-syntax-table-modify)
 
 ;; Save Org buffers after refiling and archiving!
 (advice-add 'org-refile :after (lambda (&rest _) (org-save-all-org-buffers)))
@@ -74,7 +76,7 @@
         ("Tasks-Personal.org" :maxlevel . 1)
         ("Tasks-School.org" :maxlevel . 1)
         ("Tasks-Work.org" :maxlevel . 1)
-        (nil :maxlevel . 1)))
+        (nil :maxlevel . 2)))
 
 
 (setq org-agenda-files

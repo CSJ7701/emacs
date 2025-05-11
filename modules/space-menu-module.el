@@ -258,6 +258,9 @@
     ("u" dired-unmark "Unmark" :exit t)
     ("U" dired-unmark-all-marks "Unmark all" :exit t)
     ("E" dired-mark-extension "Extension Mark" :exit t))
+   "Create"
+   (("f" dired-create-empty-file "File" :exit t)
+    ("d" dired-create-directory "Directory" :exit t))
    "File Operations"
    (("C" dired-do-copy "Copy" :exit t)
     ("D" dired-do-delete "Delete" :exit t)

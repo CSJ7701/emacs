@@ -29,6 +29,11 @@
     (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
     (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
+;; Fix for angle bracket matching
+(defun cj/org-syntax-table-modify ()
+  (modify-syntax-entry ?< "." org-mode-syntax-table)
+  (modify-syntax-entry ?> "." org-mode-syntax-table))
+
 
 ;; Initial org-mode options
 
