@@ -206,7 +206,7 @@
 (load-module "chat")
 (load-module "dired")
 (load-module "rss")
-(load-module "hledger")
+(load-module "ledger")
 (load-module "music")
 (load-module "ssh")
 (load-module "cooking")
