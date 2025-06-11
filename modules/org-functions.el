@@ -40,7 +40,13 @@
   )
 
 
-;; Org-QL agenda views
+
+;; Org-QL agenda views and helper functions
+
+(defun cj/org-ql-indent-subtask (entry)
+  (let ((level (org-element-property :level entry)))
+    (concat (make-string (* 2 (1- level)) ?\s)
+	    (org-element-property :raw-value entry))))
 
 (defun cj/project-agenda ()
   (org-ql-search (cj/org-roam-list-notes-by-tag "Project" "Archived")
@@ -49,7 +55,7 @@
     :sort '(priority todo)
     :super-groups '((:auto-category t))))
 
-(defun cj/school-agenda ()
+(defun cj-archive/school-agenda ()
   (org-ql-search "~/org/Tasks-School.org"
     '(and (todo)
 	  (not (done))
@@ -75,15 +81,13 @@
 
 (defun cj/dashboard-agenda ()
   (org-ql-search org-agenda-files
-    '(and (or (todo)
-	      (habit))
+    '(and (or (todo) (habit))
 	  (not (done))
 	  (not (tags "Appointment"))
 	  (or (ts :to +10)
 	      (not (ts))))
     :sort '(priority deadline scheduled date)
-    :super-groups '((:name "Habit"
-			   :habit)
+    :super-groups '((:name "Habits" :habit)
 		    (:name "Today"
 			   :time-grid t
 			   :deadline past
@@ -94,19 +98,32 @@
 		    (:name "Next"
 			   :deadline future
 			   :scheduled future)
-		    (:name "General")
+		    (:name "General Tasks"
+			   :todo ("TODO" "NEXT"))
 		    (:name "Events"
 			   :todo nil
 			   :date today
-		    ))))
+			   ))
+    ))
 
+(defun cj/next-agenda ()
+  (org-ql-search org-agenda-files
+    '(and (not (done))
+	  (todo "NEXT"))
+    :sort '(priority deadline scheduled)
+    :super-groups '((:auto-tags t))))
+
+(defun cj/waiting-agenda ()
+  (org-ql-search org-agenda-files
+    '(todo "WAITING" "DEFERRED")
+    :super-groups '((:auto-tags t))))
 
 
 
 ;; Org-Capture helper views
 
-    (defun org-ask-location ()
-      (let* ((org-refile-targets '((nil :maxlevel . 9)))
+(defun org-ask-location ()
+  (let* ((org-refile-targets '((nil :maxlevel . 9)))
     	 (hd (condition-case nil
     		 (car (org-refile-get-location nil nil t t))
                    (error (car org-refile-history)))))
@@ -120,6 +137,17 @@
           (or (bolp) (insert "\n"))
           (insert "* " hd "\n")))
       (end-of-line))
+
+(defun cj/capture-project-file ()
+  "Return a filename for a roam project file"
+  (let* (
+	 (file (org-roam-node-file (org-roam-node-read nil (cj/org-roam-filter-by-tag "Project")))))
+    (set-buffer (org-capture-target-buffer file))
+    (goto-char (point-min))
+    (if (re-search-forward
+	 (format org-complex-heading-regexp-format (regexp-quote "Inbox")) nil t)
+	(goto-char (point-at-bol))
+      (goto-char (point-max)))))
 
 ;; Automatically archive todo entries when marked as done.
 

@@ -168,6 +168,7 @@
 (load-module "web")
 (load-module "lua")
 (load-module "java")
+(load-module "guile")
 (load-module "matlab")
 (load-module "yuck")
 (load-module "tridactyl")

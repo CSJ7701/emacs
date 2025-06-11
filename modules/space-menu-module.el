@@ -43,7 +43,8 @@
 (pretty-hydra-define space-menu-org-agenda (:foreign-keys warn :title "󰘧 Org Agenda" :quit-key ("<escape>" "C-g"))
   ("Frequent"
    (("d" (cj/dashboard-agenda) "Dashboard" :exit t)
-    ("s" (cj/school-agenda) "School Planner" :exit t)
+    ("n" (cj/next-agenda) "Next" :exit t)
+    ("w" (cj/waiting-agenda) "Waiting" :exit t)
     ("p" (cj/project-agenda) "Projects" :exit t)
     )
    ))
