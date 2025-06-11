@@ -1,10 +1,10 @@
 (use-package mu4e
-  :defer 1
+  ;:defer 1
   :load-path "/usr/share/emacs/site-lisp/mu4e/")
-(require 'mu4e-org)
+;(require 'mu4e-org)
 (use-package org-mime)
 (use-package htmlize)
-(use-package mu4e-alert)
+;(use-package mu4e-alert)
 
 (setq mu4e-alert-interesting-mail-query "flag:unread AND NOT flag:trashed AND NOT maildir:/spam/")
 (setq mu4e-attachment-dir "/home/csj7701/Downloads/")
@@ -15,18 +15,24 @@
       mu4e-update-interval (* 10 60)
       mu4e-get-mail-command "mbsync -a"
       mu4e-maildir "~/Mail"
-      message-send-mail-function 'smtpmail-send-it
+      mail-user-agent 'mu4e-user-agent
       mu4e-compose-format-flowed t
       mu4e-notification-support t
-      mu4e-context-policy 'pick-first
+      mu4e-context-policy 'ask
       shr-color-visible-luminance-min 800
       org-mime-export-options '(:section-numbers nil :with-author nil :with-toc nil)
-      mu4e-alert-set-default-style 'libnotify)
+      )
+      ;mu4e-alert-set-default-style 'libnotify)
 ;;Dont know why the shr var is defined here. It has something to do with counsel.
+
+(setq message-send-mail-function 'smtpmail-send-it
+      send-mail-function 'smtpmail-send-it
+      message-sendmail-envelope-from nil
+      )
+ 
 
 (setq mu4e-contexts
       (list
-       ;; Personal
        (make-mu4e-context
 	:name "Personal"
 	:match-func
@@ -49,7 +55,7 @@
 	  (when msg
 	    (string-prefix-p "/Work" (mu4e-message-field msg :maildir))))
 	:vars '((user-mail-address . "C.Ship.Johnson@gmail.com")
-		(user-full-name . "Christian Johnson")
+		(user-full-name . "Christian S. Johnson")
 		(smtpmail-smtp-server . "smtp.gmail.com")
 		(smtpmail-smtp-service . 465)
 		(smtpmail-stream-type . ssl)
@@ -80,8 +86,8 @@
 (add-to-list 'mu4e-view-actions
              '("read later" . cj/capture-mail-read-later) t)
 (add-to-list 'message-send-hook 'org-mime-htmlize)
-(add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
-(add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
+;(add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
+;(add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
 
 (defun cj/capture-mail-follow-up (msg)
   (interactive)

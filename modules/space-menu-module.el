@@ -236,6 +236,7 @@
     ("t" cj/ledger-insert-tag "Tag" :exit t)
     ("r" cj/ledger-rename-account "Rename Account" :exit t)
     ("b" cj/ledger-insert-budget "Budget" :exit t)
+    ("B" (cj/ledger-insert-budget t) "Budget (Other month)" :exit t)
     )
    "Reports"
    (("R" cj/ledger-report "Ledger Reports" :exit t)
@@ -258,6 +259,9 @@
     ("u" dired-unmark "Unmark" :exit t)
     ("U" dired-unmark-all-marks "Unmark all" :exit t)
     ("E" dired-mark-extension "Extension Mark" :exit t))
+   "Create"
+   (("f" dired-create-empty-file "File" :exit t)
+    ("d" dired-create-directory "Directory" :exit t))
    "File Operations"
    (("C" dired-do-copy "Copy" :exit t)
     ("D" dired-do-delete "Delete" :exit t)

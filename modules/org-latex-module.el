@@ -18,10 +18,16 @@
 ;; (setq org-latex-src-block-backend 'minted)
 (setq org-latex-src-block-backend 'verbatim)
 
-;; (setq org-latex-pdf-process
-;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+ (setq org-latex-pdf-process
+       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq org-latex-pdf-process
+      '("xelatex -interaction nonstopmode -output-directory %o %f"
+        "biber --output-directory %o $(basename %f .tex)"
+        "xelatex -interaction nonstopmode -output-directory %o %f"
+        "xelatex -interaction nonstopmode -output-directory %o %f"))
 
 (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 

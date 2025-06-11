@@ -9,7 +9,8 @@
 (add-to-list 'org-modules 'org-habit)
 (use-package org-ql)
 (use-package org-bullets)
-
+(require 'org-protocol)
+					;(use-package org-agenda-property)
 (load-module "org-contrib")
 (load-module "org-babel")
 (load-module "org-latex")
@@ -39,8 +40,10 @@
 (setq org-habit-today-glyph 9671)
 (setq org-habit-show-done-always-green t)
 
+;; Fix org mode angle bracket issue
+(add-hook 'org-mode-hook #'cj/org-syntax-table-modify)
 
-;; Save org buffers after refiling and archiving
+;; Save Org buffers after refiling and archiving!
 (advice-add 'org-refile :after (lambda (&rest _) (org-save-all-org-buffers)))
 (advice-add 'org-archive-subtree :after 'org-save-all-org-buffers)
 

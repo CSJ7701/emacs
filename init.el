@@ -74,6 +74,7 @@
 		darkroom-mode-hook
 		xwidget-webkit-mode-hook
 		doc-view-mode
+		mu4e-headers-mode
 		cfw:calendar-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -200,7 +201,8 @@
 (load-module "evil-nerd-commenter")
 (load-module "rainbow-delimiters")
 (load-module "browsers")
-(load-module "mail")
+(load-module "mu4e")
+					; (load-module "notmuch")
 (load-module "chat")
 (load-module "dired")
 (load-module "rss")
@@ -222,7 +224,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("571661a9d205cb32dfed5566019ad54f5bb3415d2d88f7ea1d00c7c794e70a36" default))
+   '("b3775ba758e7d31f3bb849e7c9e48ff60929a792961a2d536edec8f68c671ca5" "571661a9d205cb32dfed5566019ad54f5bb3415d2d88f7ea1d00c7c794e70a36" default))
  '(safe-local-variable-values
    '((python-shell-interpreter . "/home/csj7701/.virtualenvs/ServerHub/bin/")
      (eval progn
