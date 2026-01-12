@@ -5,7 +5,7 @@
   ("k" text-scale-decrease "out")
   ("f" nil "finished" :exit t))
 
-(defun my-calendar ()
+(defun my-calendar-old ()
   (interactive)
   (cfw:open-calendar-buffer
    :view 'week
@@ -15,6 +15,32 @@
     (cfw:org-create-file-source "Work" "~/org/Tasks-Work.org" "#3498DB")
     (cfw:org-create-file-source "School" "~/org/Tasks-School.org" "#9B59B6")
     (cfw:org-create-file-source "Habit" "~/org/Habit.org" "darkseagreen"))))
+
+(defun my-calendar ()
+  (interactive)
+  (let ((sources '())
+        (headings '(("Personal" "#186A3B")
+                    ("Work"     "#3498DB")
+                    ("School"   "#9B59B6")))
+        (calendar-file "~/org/Calendar.org"))
+    (with-current-buffer (find-file-noselect calendar-file)
+      (dolist (heading headings)
+        (let* ((name (car heading))
+              (color (cadr heading))
+              (tempfile (make-temp-file (concat name "-org-") nil ".org")))
+          ;; Find the subtree
+          (save-restriction
+            (widen)
+            (goto-char (point-min))
+            (when (re-search-forward (concat "^* " (regexp-quote name)) nil t)
+              (org-narrow-to-subtree)
+              (write-region (point-min) (point-max) tempfile)))
+          ;; Add to sources
+          (push (cfw:org-create-file-source name tempfile color) sources))))
+    ;; Open calendar
+    (cfw:open-calendar-buffer
+     :view 'week
+     :contents-sources (nreverse sources))))
 
 (defun cj/space-menu-timeblock ()
   (interactive)

@@ -247,5 +247,89 @@ Uses a half second timer to introduce a delay."
 			  (substring-no-properties tag))
 			tags)
 	      '()))) ; Return an empty list if no tags
-  elements))
+	  elements))
 
+
+
+
+
+;; Helper functions for inserting calendar events
+
+;; ;; Like org-read-date, but org-read-date doesn't handle time ranges... which is dumb.
+(defun org-read-date-string ()
+  "Prompt user for an Org timestamp, supporting time ranges via calendar."
+  (with-temp-buffer
+    ;; use Org’s built-in interactive timestamp function
+    (org-mode)
+    (call-interactively #'org-time-stamp)
+    ;; return the inserted timestamp string
+    (string-trim (substring-no-properties (buffer-string)))))
+
+(defun same-day-p (t1 t2)
+  "Return non-nil if T1 and T2 fall on the same calendar day."
+  (let ((d1 (decode-time t1))
+	(d2 (decode-time t2)))
+    (and (= (nth 3 d1) (nth 3 d2)) ; Day
+	 (= (nth 4 d1) (nth 4 d2)) ; Month
+	 (= (nth 5 d1) (nth 5 d2)) ; Year
+	 )))
+
+(defun org-insert-repeated-timestamps (start end repeater)
+  "Insert Org timestamps from START to END separated by REPEATER.
+START and END are full Org timestamps, possibly with a time range.
+REPEATER is a string like '+1w', '+2d', '+1m', or '+1y'."
+  (interactive
+   (list (org-read-date-string)
+         (org-read-date-string)
+         (read-string "Repeater (e.g. +1w, +2d, +1m, +1y): ")))
+  (unless (string-match "^\\+\\([0-9]+\\)\\([dwmy]\\)$" repeater)
+    (user-error "Invalid repeater syntax (expected +<num><unit>, e.g. +1w)"))
+  (let* ((n (string-to-number (match-string 1 repeater)))
+         (unit (match-string 2 repeater))
+         ;; detect if range (HH:MM-HH:MM)
+         (range-match (string-match
+                       "\\([0-9][0-9]:[0-9][0-9]\\)-\\([0-9][0-9]:[0-9][0-9]\\)"
+                       start))
+         (start-has-time (or range-match (string-match-p "[0-9]:[0-9]" start)))
+         ;; extract the end-of-range time string
+         (end-of-range (when range-match (match-string 2 start)))
+         ;; base times for iteration
+         (base-start (org-read-date nil t start))
+         (base-end   (org-read-date nil t end)))
+
+    ;; Manually correct `base-start`’s time to match user input exactly
+    (when (string-match "\\([0-9][0-9]\\):\\([0-9][0-9]\\)" start)
+      (let* ((dt (decode-time base-start))
+             (hour (string-to-number (match-string 1 start)))
+             (min  (string-to-number (match-string 2 start))))
+        (setq base-start (apply #'encode-time
+                                (list (nth 0 dt) min hour (nth 3 dt)
+                                      (nth 4 dt) (nth 5 dt) (nth 8 dt))))))
+
+    (let* ((ts-format (cond
+                       (range-match "<%Y-%m-%d %a %H:%M")
+                       (start-has-time "<%Y-%m-%d %a %H:%M>")
+                       (t "<%Y-%m-%d %a>")))
+           (current base-start))
+      (cl-labels
+          ((step (ti)
+                 (pcase unit
+                   ("d" (time-add ti (days-to-time n)))
+                   ("w" (time-add ti (days-to-time (* 7 n))))
+                   ("m" (let* ((dt (decode-time ti)))
+                          (apply #'encode-time
+                                 (append (seq-subseq dt 0 3)
+                                         (list (+ (nth 4 dt) n))
+                                         (list (nth 5 dt))))))
+                   ("y" (let* ((dt (decode-time ti)))
+                          (apply #'encode-time
+                                 (append (seq-subseq dt 0 3)
+                                         (list (nth 4 dt))
+                                         (list (+ (nth 5 dt) n)))))))))
+        (while (or (time-less-p current base-end)
+		   (same-day-p current base-end))
+          (insert (format-time-string ts-format current))
+          (when end-of-range
+            (insert "-" end-of-range ">"))
+          (insert "\n")
+          (setq current (step current)))))))

@@ -1,10 +1,10 @@
 
 (use-package python-mode
   :custom (python-shell-interpreter "python3"))
-(use-package lsp-pyright
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp))))
+;(use-package lsp-pyright
+;  :hook (python-mode . (lambda ()
+;			 (require 'lsp-pyright)
+;                         (lsp))))
 
 (use-package pyvenv
   :ensure t
@@ -21,8 +21,8 @@
 (use-package poetry)
 
 
-(add-hook 'python-mode 'lsp-mode)
-(add-hook 'python-mode '(lambda () (require 'lsp-pyright) (lsp)))
+;(add-hook 'python-mode 'lsp-mode)
+;(add-hook 'python-mode '(lambda () (require 'lsp-pyright) (lsp)))
 (add-hook 'python-mode 'pyvenv-mode)
 (add-hook 'python-mode 'eglot-ensure)
 

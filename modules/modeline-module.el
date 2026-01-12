@@ -4,7 +4,7 @@
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
 (setq doom-modeline-major-mode-color-icon t
-      doom-modeline-workspace-name nil
+      ; doom-modeline-workspace-name nil
       doom-modeline-buffer-state-icon t
       doom-modeline-buffer-name t
       doom-modeline-modal t

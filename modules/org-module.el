@@ -5,7 +5,7 @@
   :straight (:type built-in))
 
 (require 'org-protocol)
-(require 'org-habit)
+;(require 'org-habit)
 (add-to-list 'org-modules 'org-habit)
 (use-package org-ql)
 (use-package org-bullets)
@@ -17,7 +17,7 @@
 (load-module "org-yt")
 (load-module "org-notifications")
 (load-module "org-ref")
-(load-module "org-caldav")
+; (load-module "org-caldav")
 (load-module "org-toc")
 
 ;; Standard Org Settings
@@ -66,14 +66,12 @@
 
 (setq org-refile-targets
       '(("Archive.org" :maxlevel . 1)
-	("Agenda.org" :maxlevel . 2)
-	("Inbox.org" :maxlevel . 1)
 	(nil :maxlevel . 1)))
 
 (setq org-agenda-files
       '("~/org/Mail.org"
-	"~/org/Agenda.org"
-	"~/org/Inbox.org"))
+	"~/org/Tasks.org"
+	"~/org/Calendar.org"))
 
 (setq org-todo-keywords ;; ! (log time), @ (add note), ^ (???)
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)" "CANC(c@)")
@@ -116,27 +114,23 @@
 
 (setq org-capture-templates
       `(
-	("t" "Task" entry
-	 (file+headline "~/org/Agenda.org" "Tasks")
-	 "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n")
-
-	("n" "Note" entry
-	 (file+headline "~/org/Agenda.org" "Notes")
-	 "* %?\nEntered on %U\n")
-
-	("e" "Event" entry
-	 (file+headline "~/org/Agenda.org" "Events")
-	 "* %?\n<%^T>\n")
-
-	("h" "Habit" entry
-	 (file+headline "~/org/Agenda.org" "Habits")
-	 "* TODO %?\nSCHEDULED: %^T\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:CREATED: %U\n:END:\n")
-
 	("i" "Inbox" entry
-	 (file "~/org/Inbox.org")
-	 "* %?\n%U\n")
+	 (file+headline "~/org/Tasks.org" "Inbox")
+	 "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n")
 
-	("p" "Project" entry (function cj/capture-project-file)
+	("w" "Work" entry
+	 (file+headline "~/org/Tasks.org" "Work")
+	 "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n")
+
+	("p" "Personal" entry
+	 (file+headline "~/org/Tasks.org" "Personal")
+	 "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n")
+
+	("s" "School" entry
+	 (file+headline "~/org/Tasks.org" "School")
+	 "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n")
+
+	("P" "Project" entry (function cj/capture-project-file)
 	 "** TODO %?")
 
 	("j" "Journal")
