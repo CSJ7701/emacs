@@ -7,7 +7,7 @@
 (use-package hydra)
 (use-package major-mode-hydra)
 
-(global-set-key (kbd "C-c SPC") 'space-menu/body)
+(global-set-key (kbd "C-SPC") 'space-menu/body)
 
 ;;; ============================================================================
 ;;; Basic Space Menu

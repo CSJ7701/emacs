@@ -9,6 +9,7 @@
 (global-set-key (kbd "M-TAB") 'completion-at-point)
 (global-set-key (kbd "C-h C-f") 'find-function-at-point)
 (global-set-key (kbd "C-x C-f") 'find-file)
+(global-set-key (kbd "C-c C-SPC") 'set-mark-command)
 
 ;; Windmove bindings (supporting multiple modifier combos)
 (global-set-key (kbd "C-S-<left>")  'windmove-left)
