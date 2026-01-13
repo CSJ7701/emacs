@@ -21,19 +21,17 @@
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 
-;; TODO: arbitrary 'if' predicate. Pass a method that must evaluate to nil or non-nil
-;; TODO: sliver-run method. Same conditional logic as sliver load, but for running encapsulated method (potentially unneeded? Basically the same concept as loading a file... but maybe if you don't want to make a file for a small piece of code?
-;; TODO: sliver-init-module needs to call sliver-create-module
-;; TODO: Update readme to show lists for conditions
+
 (use-package sliver
   :straight (sliver :type git :host github :repo "CSJ7701/Sliver"))
 (setq sliver-modules-dir (expand-file-name "sliver" user-emacs-directory))
 
 (setq sliver-machine-profiles
-      '(("Desktop" . (:hostname ("Glamdring" "Anduril")))
-	("Server" . (:hostname ("Aiglos")))
-	("Guix" . (:hostname ("Aiglos")))
-	("Ellama-Machines" . (:hostname ()))
+      '(("Desktop" . (:hostname '("Glamdring" "Anduril")))
+	("Glamdring" . (:hostname "Glamdring"))
+	("Server" . (:hostname '("Aiglos")))
+	("Guix" . (:hostname '("Aiglos")))
+	("Ellama-Machines" . (:hostname '()))
 	))
 
 ;; Initial Setup
