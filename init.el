@@ -82,6 +82,7 @@
 (sliver-load "authentication")
 (sliver-load "rainbow-delimiters")
 (sliver-load "ellama" :profile "Ellama-Machines")
+(sliver-load "clippety" :profile "Server")
 
 ;; Language configurations
 (sliver-load "python") ;;; Redo this module
