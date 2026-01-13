@@ -17,6 +17,8 @@
        (("o" space-menu-org/body "   Org" :exit t))))
   )
 
+(with-eval-after-load 'ivy
+  (define-key org-capture-mode-map (kbd "C-c C-t") 'counsel-org-tag))
 
 ;; Standard Org Settings
 (setq org-ellipsis " ▾")

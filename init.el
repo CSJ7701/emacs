@@ -53,10 +53,10 @@
 (sliver-load "org-functions")
 (sliver-load "org-extras")
 (sliver-load "org-latex-extra")
-(sliver-load "org-ref")
+(sliver-load "org-ref" :profile "Desktop")
 
 ;; Org Roam
-(sliver-load "org-roam")
+(sliver-load "org-roam" :profile "Desktop")
 
 ;; Org Peripherals
 (sliver-load "org-protocol" :profile "Desktop")
@@ -111,26 +111,13 @@
 (sliver-load "cooking" :profile "Desktop")
 (sliver-load "random")
 
-;; NEXT
-
-;;; Look at 'functions' files
-;;; Look at unused modules in current config
-
-
-
 ;; REFACTOR INTO A MODULE
-
 
 (custom-set-faces
  '(org-agenda-date-today               ((t (:foreground "SeaGreen2" :weight bold))))
  '(org-agenda-structure                ((t (:foreground "#2e8b57"))))
  '(org-imminent-deadline               ((t (:foreground "MediumPurple3" :weight bold :slant italic))))
  '(org-upcoming-deadline               ((t (:foreground "LightPink" :slant oblique)))))
-
-					; (define-key org-capture-mode-map (kbd "C-c C-t") 'counsel-org-tag)
-
-
-
 
 (use-package citar
   :after vertico
