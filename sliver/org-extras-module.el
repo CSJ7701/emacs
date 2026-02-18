@@ -11,6 +11,10 @@
 (require 'ox-extra)
 (require 'org-tempo)
 
+(straight-use-package
+ '(ox-jdf :type git :host github :repo "CSJ7701/ox-jdf"))
+
+
 
 ;;; ====================================
 ;;; LATEX CONFIGURATION
@@ -29,13 +33,20 @@
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
-;;(setq org-latex-pdf-process
-;;      '("xelatex -interaction nonstopmode -output-directory %o %f"
-;;        "biber --output-directory %o $(basename %f .tex)"
-;;        "xelatex -interaction nonstopmode -output-directory %o %f"
-;;        "xelatex -interaction nonstopmode -output-directory %o %f"))
+;; (setq org-latex-pdf-process
+;;       '("xelatex -interaction nonstopmode -output-directory %o %f"
+;;         "biber --output-directory %o $(basename %f .tex)"
+;;         "xelatex -interaction nonstopmode -output-directory %o %f"
+;;         "xelatex -interaction nonstopmode -output-directory %o %f"))
 
-;;(setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+;; (setq org-latex-pdf-process
+;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;; 	"biber --output-directory %o $(basename %f .tex)"
+;; 	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;; 	"latex %f"))
+
+(setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+
 
 (add-to-list 'org-latex-classes
              '("IEEEtran"
