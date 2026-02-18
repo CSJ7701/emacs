@@ -29,8 +29,8 @@
 (setq sliver-machine-profiles
       '(("Desktop" . (:hostname '("Glamdring" "Anduril")))
 	("Glamdring" . (:hostname "Glamdring"))
-	("Server" . (:hostname '("Aiglos")))
-	("Guix" . (:hostname '("Aiglos")))
+	("Server" . (:hostname '("aiglos")))
+	("Guix" . (:hostname '("aiglos")))
 	("Ellama-Machines" . (:hostname '()))
 	))
 
