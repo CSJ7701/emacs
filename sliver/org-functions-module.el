@@ -1,3 +1,9 @@
+;;; name: Org Functions
+;;; depends: org
+;;; conflicts:
+;;; description: Various org functions. Extracted out to unclutter main config.
+
+
 
 ;; configures text faces and heading size
 (defun cj/org-font-setup ()
@@ -333,3 +339,39 @@ REPEATER is a string like '+1w', '+2d', '+1m', or '+1y'."
             (insert "-" end-of-range ">"))
           (insert "\n")
           (setq current (step current)))))))
+
+
+(defun cj/daily-capture-properties ()
+  "Function to be used with =org-capture= and 'function' to find today's property drawer location."
+  (interactive)
+  (let* ((today (format-time-string "%Y-%m-%d %A"))
+	 (year (format-time-string "%Y"))
+	 (month (format-time-string "%Y-%m %B")))
+    (find-file cj/journal-file)
+    (with-current-buffer (find-file cj/journal-file)
+      (goto-char (point-min))
+      (unless (re-search-forward (format "^* %s" year) nil t)
+	(goto-char (point-max))
+	(insert (format "* %s\n" year)))
+      (unless (re-search-forward (format "^** %s" month) nil t)
+	(re-search-forward (format "^* %s" year) nil t)
+	(forward-line)
+	(insert (format "** %s\n" month)))
+      (unless (re-search-forward (format "^*** %s" today) nil t)
+	(re-search-forward (format "^** %s" month) nil t)
+	(forward-line)
+	(insert (format "*** %s\n" today)))
+      (re-search-forward (format "^*** %s" today) nil t)
+      (unless (re-search-forward ":PROPERTIES:" nil t)
+	(end-of-line)
+	(newline)
+	(insert ":PROPERTIES:\n\n:END:")
+	(previous-line))
+      (if (re-search-forward ":Rating:" nil t)
+	  (progn
+	    (kill-whole-line)
+	    (previous-line)
+	    (newline)))
+	
+      )))
+

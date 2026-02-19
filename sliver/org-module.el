@@ -1,24 +1,24 @@
-(defvar org--inhibit-version-check t)
-(load-file (expand-file-name "org-functions.el" user-modules-dir))
+;;; name: Org
+;;; depends:
+;;; conflicts:
+;;; description: Org mode core module
 
 (use-package org
   :straight (:type built-in))
 
-(require 'org-protocol)
-;(require 'org-habit)
-(add-to-list 'org-modules 'org-habit)
 (use-package org-ql)
 (use-package org-bullets)
-(require 'org-protocol)
-					;(use-package org-agenda-property)
-(load-module "org-contrib")
-(load-module "org-babel")
-(load-module "org-latex")
-(load-module "org-yt")
-(load-module "org-notifications")
-(load-module "org-ref")
-; (load-module "org-caldav")
-(load-module "org-toc")
+
+(if (member "hydra" sliver--loaded-modules)
+    (pretty-hydra-define+ space-menu
+      (:foreign-keys warn :title "󰘧" :quit-key ("<escape>" "C-g"))
+      (
+       "Frequent"
+       (("o" space-menu-org/body "   Org" :exit t))))
+  )
+
+(with-eval-after-load 'ivy
+  (define-key org-capture-mode-map (kbd "C-c C-t") 'counsel-org-tag))
 
 ;; Standard Org Settings
 (setq org-ellipsis " ▾")
@@ -33,12 +33,6 @@
 (setq org-agenda-start-with-log-mode t)
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
-(setq org-habit-graph-column 60)
-(setq org-habit-show-habits t)
-(setq org-habit-show-habits-only-for-today nil)
-(setq org-habit-completed-glyph 10003)
-(setq org-habit-today-glyph 9671)
-(setq org-habit-show-done-always-green t)
 
 ;; Fix org mode angle bracket issue
 (add-hook 'org-mode-hook #'cj/org-syntax-table-modify)
@@ -49,7 +43,7 @@
 
 ;; Automatically archive done todos
 (add-hook 'org-after-todo-state-change-hook 'cj/auto-archive-todos-ql)
-(add-hook 'org-adter-todo-state-change-hook 'org-save-all-org-buffers)
+(add-hook 'org-after-todo-state-change-hook 'org-save-all-org-buffers)
 
 
 (setq org-tag-alist
@@ -147,5 +141,4 @@
 	))
 
 
-;; Functions to run at startup
-(cj/org-font-setup)
+

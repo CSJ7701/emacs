@@ -1,0 +1,14 @@
+(use-package flyspell)
+(with-eval-after-load 'consult
+  (use-package consult-flyspell))
+
+(if (file-exists-p "/usr/bin/aspell")
+    (progn
+      (setq ispell-program-name "aspell")
+      (eval-after-load "ispell"
+        '(progn (defun ispell-get-coding-system () 'utf-8)))))
+
+(define-key flyspell-mode-map "\M-\t"
+	    'flyspell-correct-wrapper)
+
+

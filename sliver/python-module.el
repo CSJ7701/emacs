@@ -1,3 +1,9 @@
+;;; name: Python
+;;; depends: lsp
+;;; conflicts:
+;;; description:
+
+
 
 (use-package python-mode
   :custom (python-shell-interpreter "python3"))
@@ -29,3 +35,4 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
 	       '(python-mode . ("jedi-language-server"))))
+
