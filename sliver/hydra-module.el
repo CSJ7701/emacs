@@ -9,7 +9,8 @@
 
 ;; Remap ALL 'set-mark-command' keybinds to 'space-menu'.
 ;; This fixes issues where terminal emacs see "C-SPC" as "C-@".
-(define-key (current-global-map) [remap set-mark-command] 'space-menu/body)
+(global-set-key (kbd "C-SPC") 'space-menu/body)
+(global-set-key (kbd "C-@") 'space-menu/body)
 
 ;;; ============================================================================
 ;;; Basic Space Menu

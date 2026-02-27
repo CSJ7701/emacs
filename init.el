@@ -29,8 +29,8 @@
 (setq sliver-machine-profiles
       '(("Desktop" . (:hostname '("Glamdring" "Anduril")))
 	("Glamdring" . (:hostname "Glamdring"))
-	("Server" . (:hostname '("aiglos")))
-	("Guix" . (:hostname '("aiglos")))
+	("Server" . (:hostname '("Aiglos")))
+	("Guix" . (:hostname '("Aiglos")))
 	("Ellama-Machines" . (:hostname '()))
 	))
 
@@ -72,7 +72,9 @@
 (sliver-load "dired")
 (sliver-load "undo-tree" :profile "Desktop")
 (sliver-load "lsp" :profile "Desktop")
-(sliver-load "corfu")
+(sliver-load "eglot")
+(sliver-load "corfu" :profile "Desktop")
+(sliver-load "corfu-terminal" :profile "Server")
 (sliver-load "projects")
 (sliver-load "magit")
 (sliver-load "eshell")

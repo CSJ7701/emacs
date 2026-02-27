@@ -1,13 +1,13 @@
+;;; name: lsp
+;;; depends:
+;;; conflicts:
+;;; description:
 
-;; Fix issues with 'project' and 'eglot'
-(straight-use-package '(project :type built-in))
-(straight-use-package '(xref :type built-in))
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred))
-(use-package eglot)
 (use-package lsp-ui)
-(use-package lsp-pyright)
+;(use-package lsp-pyright)
 (use-package lsp-treemacs)
 
 (defun cj/lsp-mode-setup ()
