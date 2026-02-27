@@ -42,6 +42,7 @@
 		darkroom-mode-hook
 		xwidget-webkit-mode-hook
 		doc-view-mode
+		pdf-view-mode
 		mu4e-headers-mode
 		cfw:calendar-mode-hook
 		tabulated-list-mode))

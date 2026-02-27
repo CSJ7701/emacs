@@ -4,7 +4,8 @@
  '((emacs-lisp . t)
    (python . t)
    (matlab . t)
-   ;; (ledger . t)
+   (ledger . t)
+   (shell . t)
    (js . t)
    (latex . t)))
 

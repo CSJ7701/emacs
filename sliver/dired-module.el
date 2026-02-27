@@ -9,9 +9,8 @@
   :hook (dired-mode . all-the-icons-dired-mode))
 (use-package dired-hide-dotfiles
   :hook (dired-mode . dired-hide-dotfiles-mode)
-  :config
-  (general-def 'dired-mode-map
-    "H" 'dired-hide-dotfiles-mode))
+  :bind (:map dired-mode-map
+	      ("H" . dired-hide-dotfiles-mode)))
 
 ;; Standard Dired options
 (setq dired-listing-switches "-lXGh --group-directories-first"

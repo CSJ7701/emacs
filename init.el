@@ -51,6 +51,7 @@
 ;;; Come back to this. This will probably need to be refactored pretty significantly
 (sliver-load "org")
 (sliver-load "org-functions")
+(sliver-load "org-projects")
 (sliver-load "org-extras")
 (sliver-load "org-latex-extra")
 (sliver-load "org-ref" :profile "Desktop")
