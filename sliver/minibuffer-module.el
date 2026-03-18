@@ -6,7 +6,10 @@
 
 
 (use-package vertico
-  :init (vertico-mode))
+  :init (vertico-mode)
+  :bind (:map vertico-map
+	      ("C-j" . vertico-exit-input))
+  )
 
 (use-package orderless
   :init (setq completion-styles '(orderless basic)
