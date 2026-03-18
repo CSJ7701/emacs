@@ -28,6 +28,7 @@
 (use-package embark
   :bind
   (("C-." . embark-act)
+   ("C-," . embark-act-all)
    ("C-;" . embark-dwim))
   :init (setq prefix-help-command #'embark-prefix-help-command))
 
