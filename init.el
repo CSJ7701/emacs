@@ -114,6 +114,7 @@
 (sliver-load "rss" :profile "Desktop")
 (sliver-load "cooking" :profile "Desktop")
 (sliver-load "random")
+(sliver-load "music")
 
 ;; REFACTOR INTO A MODULE
 
