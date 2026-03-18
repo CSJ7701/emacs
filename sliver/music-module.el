@@ -30,7 +30,7 @@
    "Subsonic"
    (("s" empv-subsonic-songs "Songs")
    ("a" empv-subsonic-albums "Albums")
-   ("A" empv-subsonic-artics "Artists")
+   ("A" empv-subsonic-artists "Artists")
    ("S" empv-subsonic-search "Search"))
    ))
 
