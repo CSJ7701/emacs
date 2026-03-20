@@ -52,9 +52,9 @@
 ;; Fonts
 (defun cj/set-font-faces ()
   (message "Setting Font Faces...")
-  (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :weight 'semibold :height cj/default-font-size)
-  (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono Nerd Font" :weight 'light :height cj/default-fixed-font-size)
-  (set-face-attribute 'variable-pitch nil :font "JetBrains Mono Nerd Font" :weight 'regular :height cj/default-variable-font-size))
+  (set-face-attribute 'default nil :font "JetBrains Mono" :weight 'semibold :height cj/default-font-size)
+  (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :weight 'light :height cj/default-fixed-font-size)
+  (set-face-attribute 'variable-pitch nil :font "JetBrains Mono" :weight 'regular :height cj/default-variable-font-size))
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions
