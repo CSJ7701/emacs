@@ -24,7 +24,7 @@
 
 (defun cj/ledger-select-account ()
   (let* ((accounts (cj/ledger-get-accounts))
-	(selection (ivy-read "Select Account: " accounts :require-match t)))
+	(selection (completing-read "Select Account: " accounts :require-match t)))
     selection))
 
 (defun cj/ledger-insert-account ()
@@ -52,7 +52,7 @@
 
 (defun cj/ledger-select-tag ()
   (let* ((tags (cj/ledger-get-tags))
-	 (selection (ivy-read "Select Tag: " tags :require-match t)))
+	 (selection (completing-read "Select Tag: " tags :require-match t)))
     selection))
 
 (defun cj/ledger-insert-tag ()
@@ -110,7 +110,7 @@ With PREFIX, prompt for month/year from the last 6 months; otherwise use today's
 	  (cl-loop for y in years append
 		   (cl-loop for m in months
 			    collect (format "%04d-%02d" y m))))
-	 (selected-date (ivy-read "Select Date (YYYY-MM): " date-options)))
+	 (selected-date (completing-read "Select Date (YYYY-MM): " date-options)))
     selected-date))
 
 ;; Technical stuff - behind the scenes to make certain reports etc work better
