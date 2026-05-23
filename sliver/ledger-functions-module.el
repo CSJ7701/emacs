@@ -24,7 +24,7 @@
 
 (defun cj/ledger-select-account ()
   (let* ((accounts (cj/ledger-get-accounts))
-	(selection (completing-read "Select Account: " accounts :require-match t)))
+	(selection (completing-read "Select Account: " accounts nil t)))
     selection))
 
 (defun cj/ledger-insert-account ()
@@ -52,7 +52,7 @@
 
 (defun cj/ledger-select-tag ()
   (let* ((tags (cj/ledger-get-tags))
-	 (selection (completing-read "Select Tag: " tags :require-match t)))
+	 (selection (completing-read "Select Tag: " tags nil t)))
     selection))
 
 (defun cj/ledger-insert-tag ()
