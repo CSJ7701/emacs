@@ -8,10 +8,10 @@
 (straight-use-package '(xref :type built-in))
 
 (use-package eglot
-  :hook (python-mode . eglot-ensure)
+  ;:hook (python-mode . eglot-ensure)
   )
 
-(with-eval-after-load 'eglot
-  (push '(python-mode "pylsp") eglot-server-programs))
+;(with-eval-after-load 'eglot
+;  (push '(python-mode "pylsp") eglot-server-programs))
 
 

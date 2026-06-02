@@ -56,6 +56,7 @@
 (sliver-load "org-latex-extra")
 (sliver-load "org-ref" :profile "Desktop")
 
+
 ;; Org Roam
 (sliver-load "org-roam" :profile "Desktop")
 
@@ -65,6 +66,8 @@
 (sliver-load "org-youtube" :profile "Desktop")
 (sliver-load "org-toc")
 (sliver-load "org-notifications" :profile "Desktop") ;; Empty.
+(sliver-load "org-flashcard")
+(sliver-load "org-highlight")
 ;; Run at startup
 (cj/org-font-setup)
 
@@ -88,7 +91,7 @@
 (sliver-load "clippety" :profile "Server")
 
 ;; Language configurations
-(sliver-load "python") ;;; Redo this module
+;(sliver-load "python") ;;; Redo this module
 (sliver-load "web")
 (sliver-load "docker")
 (sliver-load "csv")
