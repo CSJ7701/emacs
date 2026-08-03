@@ -18,4 +18,4 @@
   (lsp-ui-mode))
 
 (add-hook 'lsp-after-open-hook 'cj/lsp-mode-setup)
-(add-hook 'python-mode-hook 'lsp-mode)
+;(add-hook 'python-mode-hook 'lsp-mode)

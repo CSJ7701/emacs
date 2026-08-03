@@ -3,6 +3,7 @@
 ;;; conflicts:
 ;;; description: Org mode core module
 
+
 (use-package org
   :straight (:type built-in))
 
@@ -28,6 +29,7 @@
 (setq org-image-actual-width nil)
 (add-hook 'org-mode-hook #'org-bullets-mode)
 (add-hook 'org-mode-hook #'cj/org-mode-setup)
+
 
 ;; Org Agenda Settings
 (setq org-agenda-start-with-log-mode t)
