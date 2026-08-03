@@ -30,7 +30,7 @@
       '(("Desktop" . (:hostname '("Glamdring" "Anduril")))
 	("Glamdring" . (:hostname "Glamdring"))
 	("Server" . (:hostname '("Aiglos")))
-	("Guix" . (:hostname '("Aiglos")))
+	("Guix" . (:hostname '("Aiglos" "Anduril")))
 	("Ellama-Machines" . (:hostname '()))
 	))
 

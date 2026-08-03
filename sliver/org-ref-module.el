@@ -48,6 +48,6 @@
     (call-interactively 'org-ref-insert-cite-link)))
 (defvar org-ref-insert-cite-type-function 'org-ref-insert-cite-type-link)
 
-(defhydra+ org-ref-insert-link-hydra () ("{" (funcall org-ref-insert-cite-type-function) "Citation /w type" :column "org-ref"))
+; (defhydra+ org-ref-insert-link-hydra () ("{" (funcall org-ref-insert-cite-type-function) "Citation /w type" :column "org-ref"))
 
 				       

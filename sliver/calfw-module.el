@@ -6,8 +6,8 @@
 
 
 (use-package calfw
-  :bind (:map cfw:details-mode-map
-	      ("q" . cfw:details-kill-buffer-command))
+  :bind (:map calfw-details-mode-map
+	      ("q" . calfw-details-kill-buffer-command))
   )
 (use-package calfw-cal)
 (use-package calfw-org)

@@ -29,6 +29,9 @@
 (setq org-latex-src-block-backend 'verbatim)
 
 (setq org-latex-pdf-process
+      '("latexmk -pdflatex='pdflatex -shell-escape' -pdf -f -interaction=nonstopmode -output-directory=%o %f"))
+
+(setq org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
