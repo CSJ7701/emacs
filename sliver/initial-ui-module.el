@@ -3,7 +3,7 @@
 ;;; conflicts:
 ;;; description: Basic initial UI setup
 
-
+(require 'seq)
 
 ;; Initial UI setup
 (setq inhibit-startup-message t)
@@ -50,11 +50,21 @@
 
 
 ;; Fonts
+(defun cj/find-available-font (candidates)
+  "Return the first font in CANDIDATES present in `font-family-alist'.
+If none are found, raise an error."
+  (let ((available-fonts (font-family-list)))
+    (or (seq-find (lambda (font)
+		    (member font available-fonts))
+		  candidates)
+	(error "None of the specified fonts are available on this system: %S" candidates))))
+
 (defun cj/set-font-faces ()
   (message "Setting Font Faces...")
-  (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :weight 'semibold :height cj/default-font-size)
-  (set-face-attribute 'fixed-pitch nil :font "JetBrainsMono Nerd Font" :weight 'light :height cj/default-fixed-font-size)
-  (set-face-attribute 'variable-pitch nil :font "JetBrainsMono Nerd Font" :weight 'regular :height cj/default-variable-font-size))
+  (setq cj/font-name (cj/find-available-font '("JetBrainsMono Nerd Font" "JetBrains Mono" "JetBrains Mono NL" "DejaVu Sans Mono" "DejaVu Sans")))
+  (set-face-attribute 'default nil :font cj/font-name :weight 'semibold :height cj/default-font-size)
+  (set-face-attribute 'fixed-pitch nil :font cj/font-name :weight 'light :height cj/default-fixed-font-size)
+  (set-face-attribute 'variable-pitch nil :font cj/font-name :weight 'regular :height cj/default-variable-font-size))
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions
